@@ -460,7 +460,7 @@ public final class VideoDetailFragment
     //////////////////////////////////////////////////////////////////////////*/
 
     private void setOnClickListeners() {
-        binding.detailTitleRootLayout.setOnClickListener(v -> toggleTitleAndSecondaryControls());
+        binding.detailTitleRootLayout.setOnClickListener(v -> toggleTitleAndControls());
         binding.detailUploaderRootLayout.setOnClickListener(makeOnClickListener(info -> {
             if (isEmpty(info.getSubChannelUrl())) {
                 if (!isEmpty(info.getUploaderUrl())) {
@@ -596,16 +596,18 @@ public final class VideoDetailFragment
         }
     }
 
-    private void toggleTitleAndSecondaryControls() {
+    private void toggleTitleAndControls() {
         if (binding.detailSecondaryControlPanel.getVisibility() == View.GONE) {
             binding.detailVideoTitleView.setMaxLines(10);
             animateRotation(binding.detailToggleSecondaryControlsView,
                     VideoPlayerUi.DEFAULT_CONTROLS_DURATION, 180);
+            binding.detailControlPanel.setVisibility(View.VISIBLE);
             binding.detailSecondaryControlPanel.setVisibility(View.VISIBLE);
         } else {
             binding.detailVideoTitleView.setMaxLines(1);
             animateRotation(binding.detailToggleSecondaryControlsView,
                     VideoPlayerUi.DEFAULT_CONTROLS_DURATION, 0);
+            binding.detailControlPanel.setVisibility(View.GONE);
             binding.detailSecondaryControlPanel.setVisibility(View.GONE);
         }
         // view pager height has changed, update the tab layout
@@ -1571,6 +1573,7 @@ public final class VideoDetailFragment
         binding.detailTitleRootLayout.setClickable(true);
         binding.detailToggleSecondaryControlsView.setRotation(0);
         binding.detailToggleSecondaryControlsView.setVisibility(View.VISIBLE);
+        binding.detailControlPanel.setVisibility(View.GONE);
         binding.detailSecondaryControlPanel.setVisibility(View.GONE);
 
         checkUpdateProgressInfo(info);
