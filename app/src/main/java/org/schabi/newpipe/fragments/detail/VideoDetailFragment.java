@@ -716,26 +716,8 @@ public final class VideoDetailFragment
             return true;
         }
 
-        // If we have something in history of played items we replay it here
-        if (isPlayerAvailable()
-                && player.getPlayQueue() != null
-                && player.videoPlayerSelected()
-                && player.getPlayQueue().previous()) {
-            return true; // no code here, as previous() was used in the if
-        }
-
-        // That means that we are on the start of the stack,
-        if (stack.size() <= 1) {
-            restoreDefaultOrientation();
-            return false; // let MainActivity handle the onBack (e.g. to minimize the mini player)
-        }
-
-        // Remove top
-        stack.pop();
-        // Get stack item from the new top
-        setupFromHistoryItem(Objects.requireNonNull(stack.peek()));
-
-        return true;
+        restoreDefaultOrientation();
+        return false; // let MainActivity handle the onBack (e.g. to minimize the mini player)
     }
 
     private void setupFromHistoryItem(final StackItem item) {
