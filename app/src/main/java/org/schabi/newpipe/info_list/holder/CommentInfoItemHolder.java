@@ -128,7 +128,7 @@ public class CommentInfoItemHolder extends InfoItemHolder {
         textEllipsizer.setStreamingService(getServiceById(item.getServiceId()));
         textEllipsizer.setStreamUrl(item.getUrl());
         textEllipsizer.setContent(item.getCommentText());
-        textEllipsizer.ellipsize();
+        textEllipsizer.expand();
 
         //noinspection ClickableViewAccessibility
         itemContentView.setOnTouchListener((v, event) -> {
